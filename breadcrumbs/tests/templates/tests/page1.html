@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<ul id="breadcrumbs">{% for b in request.breadcrumbs %}<li><a href="{{ b.url }}">{{ b.name }}</a></li>{% endfor %}</ul>
+</body>
+</html>
