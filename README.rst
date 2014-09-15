@@ -11,6 +11,10 @@ Changelog
 
 0.1.1
 -----
+Non-conflicting multi-site breadcrumbs.
+
+0.1.0
+-----
 
 PENDING...
 

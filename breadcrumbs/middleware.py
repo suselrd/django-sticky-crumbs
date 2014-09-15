@@ -8,7 +8,7 @@ from views import flatpage
 class BreadcrumbsMiddleware(object):
 
     def process_request(self, request):
-        request.breadcrumbs = Breadcrumbs(request.session.get('breadcrumbs', None))
+        request.breadcrumbs = Breadcrumbs(request.session.get('breadcrumbs_%d' % settings.SITE_ID, None))
 
 
 class FlatpageFallbackMiddleware(object):

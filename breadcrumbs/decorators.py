@@ -1,4 +1,5 @@
 # coding=utf-8
+from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -16,7 +17,7 @@ def crumbs_enabled(display_name, clear_breadcrumbs=False):
                 if clear_breadcrumbs:
                     request.breadcrumbs.clear()
                 request.breadcrumbs.add(display_name, request.get_full_path())
-                self.request.session['breadcrumbs'] = self.request.breadcrumbs.dict_repr()
+                request.session['breadcrumbs_%d' % settings.SITE_ID] = self.request.breadcrumbs.dict_repr()
             except:
                 pass
             return normal_method(self, request, *args, **kwargs)
@@ -48,7 +49,7 @@ def detail_crumbs_enabled(display_template, template_args=None, clear_breadcrumb
                 if clear_breadcrumbs:
                     self.request.breadcrumbs.clear()
                 self.request.breadcrumbs.add(display_template % args, self.request.get_full_path())
-                self.request.session['breadcrumbs'] = self.request.breadcrumbs.dict_repr()
+                self.request.session['breadcrumbs_%d' % settings.SITE_ID] = self.request.breadcrumbs.dict_repr()
             except:
                 pass
             return result
