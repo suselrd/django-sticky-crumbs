@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name="django-sticky-crumbs",
-    version="0.1.1",
+    version="0.2.0",
     packages=find_packages(),
     author="Susel Ruiz Duran",
     author_email="suselrd@gmail.com",

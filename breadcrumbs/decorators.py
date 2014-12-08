@@ -59,3 +59,30 @@ def detail_crumbs_enabled(display_template, template_args=None, clear_breadcrumb
         return cls
 
     return decorator
+
+
+def wizard_crumbs_enabled(display_names, clear_breadcrumbs=False):
+
+    def decorator(cls):
+        from django.contrib.formtools.wizard.views import WizardView
+        if not issubclass(cls, WizardView):
+            raise ImproperlyConfigured("crumbs_enabled decorator is only suitable for WizardView descendants.")
+
+        normal_method = getattr(cls, 'dispatch')
+
+        def dispatch(self, request, *args, **kwargs):
+            try:
+                step_url = kwargs.get('step', None)
+                if clear_breadcrumbs and not step_url:
+                    request.breadcrumbs.clear()
+                if step_url:
+                    request.breadcrumbs.add(display_names[step_url], request.get_full_path())
+                    request.session['breadcrumbs_%d' % settings.SITE_ID] = self.request.breadcrumbs.dict_repr()
+            except:
+                pass
+            return normal_method(self, request, *args, **kwargs)
+
+        setattr(cls, 'dispatch', dispatch)
+        return cls
+
+    return decorator
