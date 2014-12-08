@@ -77,7 +77,7 @@ def wizard_crumbs_enabled(display_names, clear_breadcrumbs=False):
                     request.breadcrumbs.clear()
                 if step_url:
                     request.breadcrumbs.add(display_names[step_url], request.get_full_path())
-                    request.session['breadcrumbs_%d' % settings.SITE_ID] = self.request.breadcrumbs.dict_repr()
+                request.session['breadcrumbs_%d' % settings.SITE_ID] = request.breadcrumbs.dict_repr()
             except:
                 pass
             return normal_method(self, request, *args, **kwargs)
