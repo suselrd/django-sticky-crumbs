@@ -9,6 +9,10 @@ Based on the implementation of django-breadcrumbs (by Felipe 'chronos' Prenholat
 Changelog
 =========
 
+0.2.0
+-----
+New wizard_crumbs_enabled decorator, for WizardView
+
 0.1.1
 -----
 Non-conflicting multi-site breadcrumbs.
